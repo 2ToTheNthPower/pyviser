@@ -1,5 +1,6 @@
 /target
-/.*/**
+/.*
+!/.github
 /assets*
 assets.path
 umodel*
@@ -9,4 +10,27 @@ umodel*
 settings.txt
 /collision_meshes
 /cache
-/.cargo
+/.cargo/*
+!/.cargo/config.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+.eggs/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+rlviser/bin/

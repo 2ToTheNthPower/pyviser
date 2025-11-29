@@ -336,7 +336,6 @@ version = "0.17.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "342f7e9335416dc98642d5747c4ed8a6ad9f7244a36d5b2b7a1b7910e4d8f524"
 dependencies = [
- "bevy_dylib",
  "bevy_internal",
 ]
 
@@ -534,15 +533,6 @@ dependencies = [
  "const-fnv1a-hash",
  "log",
  "serde",
-]
-
-[[package]]
-name = "bevy_dylib"
-version = "0.17.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b7834bd6b49e3459b94fe2ee2f532de820fd8b91183976e375bf88098e48fe2"
-dependencies = [
- "bevy_internal",
 ]
 
 [[package]]
@@ -3584,6 +3574,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "pyviser"
+version = "0.8.3"
+dependencies = [
+ "ahash",
+ "bevy",
+ "bevy_egui",
+ "bevy_framepace",
+ "bevy_vector_shapes",
+ "bincode",
+ "byteorder",
+ "crossbeam-channel",
+ "image",
+ "include-flate",
+ "itertools",
+ "itoa",
+ "rust_search",
+ "serde",
+ "serde_json",
+ "thiserror 2.0.17",
+ "tracing",
+ "walkdir",
+ "zip",
+]
+
+[[package]]
 name = "quick-xml"
 version = "0.37.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3755,31 +3770,6 @@ name = "rle-decode-fast"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3582f63211428f83597b51b2ddb88e2a91a9d52d12831f9d08f5e624e8977422"
-
-[[package]]
-name = "rlviser"
-version = "0.8.7"
-dependencies = [
- "ahash",
- "bevy",
- "bevy_egui",
- "bevy_framepace",
- "bevy_vector_shapes",
- "bincode",
- "byteorder",
- "crossbeam-channel",
- "image",
- "include-flate",
- "itertools",
- "itoa",
- "rust_search",
- "serde",
- "serde_json",
- "thiserror 2.0.17",
- "tracing",
- "walkdir",
- "zip",
-]
 
 [[package]]
 name = "ron"
