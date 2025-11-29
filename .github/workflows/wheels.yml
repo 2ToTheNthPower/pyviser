@@ -1,57 +1,38 @@
 name: Build and Publish Wheels
 
-on:
-  push:
-    tags:
-      - "v*.*.*"
-  pull_request:
-    branches: [main, master]
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
-  build-wheels:
+  build_wheels:
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-        # Currently only building for ARM macOS
-        # TODO: Fix Windows and Linux builds - contributions welcome!
-        os: [ubuntu-22.04, windows-latest, macos-14]
-        # os: [macos-14]
+        os:
+          [
+            ubuntu-latest,
+            ubuntu-24.04-arm,
+            windows-latest,
+            windows-11-arm,
+            macos-15-intel,
+            macos-latest,
+          ]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      # Used to host cibuildwheel
+      - uses: actions/setup-python@v5
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install maturin
+      - name: Install cibuildwheel
+        run: python -m pip install cibuildwheel==3.3.0
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.21.0
-        env:
-          # Skip PyPy, musllinux, and i686 builds
-          CIBW_SKIP: "pp* *-musllinux* *i686"
-          # Build for Python 3.9-3.13 (all currently supported versions)
-          CIBW_BUILD: "cp39-* cp310-* cp311-* cp312-* cp313-*"
-          # Explicitly set architectures per OS (native only for macOS to avoid cross-compilation)
-          CIBW_ARCHS_LINUX: "x86_64"
-          CIBW_ARCHS_WINDOWS: "AMD64"
-          CIBW_ARCHS_MACOS: "native"
-          # Maturin handles Rust installation and building
-          CIBW_BUILD_FRONTEND: "build"
-          # Use manylinux2014 for better compatibility
-          CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
-          # Install system dependencies before building
-          CIBW_BEFORE_ALL_LINUX: |
-            yum install -y libX11-devel wayland-devel alsa-lib-devel systemd-devel libxkbcommon-devel ||
-            (apt-get update && apt-get install -y libx11-dev libwayland-dev libasound2-dev libudev-dev libxkbcommon-dev)
+        run: python -m cibuildwheel --output-dir wheelhouse
+        # to supply options, put them in 'env', like:
+        # env:
+        #   CIBW_SOME_OPTION: value
+        #   ...
 
       - uses: actions/upload-artifact@v4
         with:
