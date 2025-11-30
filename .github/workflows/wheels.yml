@@ -27,8 +27,7 @@ jobs:
       - name: Setup OS
         run: |
           if ["$RUNNER_OS"=="Linux"]; then
-              yum install -y libX11-devel wayland-devel alsa-lib-devel systemd-devel libxkbcommon-devel ||
-              (apt-get update && apt-get install -y libx11-dev libwayland-dev libasound2-dev libudev-dev libxkbcommon-dev)
+              (apt-get update && apt-get install -y libx11-dev libwayland-dev libasound2-dev libudev-dev libxkbcommon-dev wayland-client)
           fi
         shell: bash
 
