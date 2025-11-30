@@ -27,7 +27,7 @@ jobs:
       - name: Setup OS
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
-              (sudo apt-get update -y && sudo apt-get install -y libx11-dev libwayland-dev libasound2-dev libudev-dev libxkbcommon-dev libwayland-client0)
+              (sudo apt-get update -y && sudo apt-get install -y libx11-dev libwayland-dev libasound2-dev libudev-dev libxkbcommon-dev libwayland-client)
           fi
         shell: bash
 
