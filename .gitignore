@@ -1,5 +1,4 @@
 /target
-/.*
 !/.github
 /assets*
 assets.path
